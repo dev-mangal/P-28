@@ -3,6 +3,7 @@ const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Body = Matter.Body;
+const Constraint=Matter.Constraint;
 
 function preload()
 {
@@ -16,7 +17,7 @@ function setup() {
 
 	//Create the Bodies Here.
 	ground=new Ground(600,680,1200,40);
-	tree=new Tree(900,670);
+	tree=new Tree(900,700);
 	mango1=new Mango(770,330,20);
 	mango2=new Mango(840,265,10);
 	mango3=new Mango(890,290,15);
@@ -24,8 +25,8 @@ function setup() {
 	mango5=new Mango(990,300,25);
 	mango6=new Mango(945,175,20);
 	mango7=new Mango(950,250,20);
-  stone=new Stone(200,200,30);
-  launcher=new Launcher(boy,{x:165,y:565});
+  stone=new Stone(200,200,20);
+  launcher=new Launcher(stone.body,{x:165,y:565});
   boy=createSprite(220,600,0.5,0.5);
   boy.scale=0.1;
   boy.addImage(boyimg);
@@ -49,6 +50,7 @@ function draw() {
   mango6.display();
   mango7.display();
   stone.display();
+  launcher.display();
   detectcollision(stone,mango1);
   detectcollision(stone,mango2);
   detectcollision(stone,mango3);
@@ -68,3 +70,16 @@ function detectcollision(stoneb,mangob){
 	}
 }
 
+function mouseDragged(){
+  Matter.Body.setPosition(stone.body,{x:mouseX,y:mouseY});
+}
+
+function mouseReleased(){
+  launcher.fly();
+}
+
+function keyPressed(){
+  if(keyCode === 32){
+     launcher.attach(stone.body);
+  }
+}

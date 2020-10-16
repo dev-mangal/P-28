@@ -3,7 +3,7 @@ class Tree{
         this.x=x;
         this.y=y;
         this.treewidth=450;
-        this.treeheight=600;
+        this.treeheight=500;
         this.thickness=10;
         this.Image=loadImage("tree.png");
         var options={isStatic:true}
@@ -17,6 +17,6 @@ class Tree{
     display(){
         var pos=this.base.position;
         imageMode(CENTER);
-        image(this.Image,pos.x,400,this.treewidth,this.treeheight);
+        image(this.Image,pos.x,400,this.treewidth,this.treeheight+100);
     }
 }
